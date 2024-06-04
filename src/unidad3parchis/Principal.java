@@ -53,5 +53,6 @@ public class Principal {
 		}
 		System.out.println("¡ENHORABUENA " + partida.esGanador() + ", HAS GANADO!");
 
+		sc.close();
 	}
 }
