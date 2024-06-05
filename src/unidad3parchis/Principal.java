@@ -10,8 +10,11 @@ public class Principal {
 
 		String nombreJ1 = "";
 		String nombreJ2 = "";
+		String ganador = "";
 
 		int turnoJugador = 1;
+
+		Parchis partida;
 
 		System.out.println("BIENVENIDO AL PARCHÍS DEL IES NERVIÓN =D");
 
@@ -23,19 +26,13 @@ public class Principal {
 			nombreJ2 = sc.nextLine();
 		} while (nombreJ1.equalsIgnoreCase(nombreJ2));
 
-		Parchis partida = new Parchis(nombreJ1, nombreJ2);
+		partida = new Parchis(nombreJ1, nombreJ2);
 
-		while (partida.esGanador().equals("")) {
+		ganador = partida.esGanador();
+
+		while (ganador.equals("")) {
 			System.out.println("Pulse una tecla para avanzar");
 			sc.nextLine();
-			
-			if (Parchis.getDado1() != Parchis.getDado2()) {
-				if (turnoJugador == 1) {
-					turnoJugador = 2;
-				} else {
-					turnoJugador = 1;
-				}
-			}
 
 			System.out.println("Turno de " + (turnoJugador == 1 ? nombreJ1 : nombreJ2));
 			Parchis.tiraDados();
@@ -45,13 +42,21 @@ public class Principal {
 			partida.avanzaPosiciones(turnoJugador);
 
 			partida.pintaTablero();
-			
+
 			System.out.println();
 			partida.estadoCarrera();
 			System.out.println();
-			
+
+			if (Parchis.getDado1() != Parchis.getDado2()) {
+
+				turnoJugador = turnoJugador == 1 ? 2 : 1;
+			}
+
+			ganador = partida.esGanador();
+
 		}
-		System.out.println("¡ENHORABUENA " + partida.esGanador() + ", HAS GANADO!");
+
+		System.out.println("¡ENHORABUENA " + ganador + ", HAS GANADO!");
 
 		sc.close();
 	}

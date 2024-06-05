@@ -44,28 +44,31 @@ public class Parchis {
 
 		}
 		System.out.println();
-		System.out.print(nomJ1);
-		for (int i = 0; i <= TAM_TABLERO; i++) {
-			System.out.print("\t" + (i == 0 ? "I" : (i == TAM_TABLERO ? "F" : (i == fichaJ1 ? "O" : ""))));
+		
+		pintaJugador(nomJ1, fichaJ1);
+		
+		pintaJugador(nomJ2, fichaJ2);
+	}
 
-		}
-		System.out.println();
-		System.out.print(nomJ2);
+	private void pintaJugador(String nombre, int ficha) {
+		System.out.print(nombre);
 		for (int i = 0; i <= TAM_TABLERO; i++) {
-			System.out.print("\t" + (i == 0 ? "I" : (i == TAM_TABLERO ? "F" : (i == fichaJ2 ? "O" : ""))));
+			System.out.print("\t" + (i == 0 ? "I" : (i == TAM_TABLERO ? "F" : (i == ficha ? "O" : ""))));
 
 		}
 		System.out.println();
 	}
 
 	public void avanzaPosiciones(int numJugador) {
+		int tirada = dado1 + dado2;
+		
 		if (numJugador == 1) {
-			fichaJ1 += dado1 + dado2;
+			fichaJ1 += tirada;
 			if (fichaJ1 > TAM_TABLERO) {
 				fichaJ1 = 2 * TAM_TABLERO - fichaJ1;
 			}
 		} else {
-			fichaJ2 += dado1 + dado2;
+			fichaJ2 += tirada;
 			if (fichaJ2 > TAM_TABLERO) {
 				fichaJ2 = 2 * TAM_TABLERO - fichaJ2;
 			}
@@ -88,9 +91,9 @@ public class Parchis {
 		String nombreGanador = "";
 
 		if (fichaJ1 == TAM_TABLERO) {
-			nombreGanador += nomJ1;
+			nombreGanador = nomJ1;
 		} else if (fichaJ2 == TAM_TABLERO) {
-			nombreGanador += nomJ2;
+			nombreGanador = nomJ2;
 		} 
 
 		return nombreGanador;
